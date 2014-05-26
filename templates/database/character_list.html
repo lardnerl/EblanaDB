@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Characters</h1>
+
+<ul>
+  {% for Characters in object_list %}
+    <li class="Characters">{{ Characters }}</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url "character-new" %}">add character</a>
+{% endblock %}

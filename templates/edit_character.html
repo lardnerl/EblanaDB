@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Add Character</h1>
+
+<form action="{% url "character-new" %}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input id="save_character" type="submit" value="Save" />
+</form>
+
+<a href="{% url "character-list" %}">back to list</a>
+
+{% endblock %}
