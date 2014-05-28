@@ -1,0 +1,113 @@
+body
+{
+	font-size: 0.8em;
+}
+
+table
+{
+}
+
+#charactersForPrinting table.character, table.user
+{
+	border-spacing:0;
+	border-collapse:collapse;
+	border: 1px solid black;
+	border-left: 0px;
+	vertical-align: top;
+	width: 40%;
+	float: left;
+	height: 48%;
+}
+
+table.character
+{ 
+	margin-bottom: 15px;
+	margin-left: 11%;
+}
+
+.characterDiv table.character:first-child, table.user  
+{
+	margin-left: 0;
+}
+
+.characterDiv table.user:last-child 
+{
+	margin-left: 11%;
+}
+
+.character td:not(.characterAttributes):first-child, .user td:first-child
+{
+	width: 37%;
+}
+
+
+.attribute
+{
+	width: 32%;
+	display: inline-block;
+	padding:0px;
+	margin: 0px;
+}
+
+
+.character.feats td:first-child
+{
+	width: 80%;
+}
+
+table.character td, table.character th, table.user td, table.user th
+{
+	vertical-align: top;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	display: table-cell;
+}
+
+#charactersForPrinting table.character td:last-child
+{
+
+}
+
+#charactersForPrinting tr:last-child td, #charactersForPrinting tr:last-child th
+{
+	border-bottom: none;
+	border-left: 1px solid black;
+}
+
+.characterDiv
+{
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	border-bottom: 1px dashed black;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	height: 360px;
+}
+
+.characterDiv:first-child
+{
+	padding-top: 0px;
+}
+
+.characterDiv:last-child
+{
+	border-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+.icItem:after
+{
+	content: '; ';
+}
+
+.icItem:last-child:after
+{
+	content: '';
+}
+
+.qrCode
+{
+	border-top: 1px solid black;
+	width: 30%;
+}

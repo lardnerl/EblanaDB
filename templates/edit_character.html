@@ -2,9 +2,13 @@
 
 {% block content %}
 
+{% if character.id %}
+<h1>Edit Character</h1>
+{% else %}
 <h1>Add Character</h1>
+{% endif %}
 
-<form action="{% url "character-new" %}" method="POST">
+<form action="{{ action }}" method="POST">
   {% csrf_token %}
   <ul>
     {{ form.as_ul }}

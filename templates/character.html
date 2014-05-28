@@ -1,0 +1,136 @@
+{% load staticfiles %}
+
+<html><head>
+		<meta charset="UTF-8"> 
+		<title>Default Page Title</title>
+                <meta charset="utf-8">
+                                    <script type="text/javascript" src="{% static  'bootstrap/js/printCharacters.js' %}"></script><style type="text/css"></style>
+                                                    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/printCharacter.css' %}">
+                	</head>
+	<body>
+		<div id="charactersForPrinting">
+			<div class="characterDiv">
+			<table class="character">
+	<tbody>
+		<tr class="detail">
+			<td>Player ID</td>
+			<td>{{ character.id }}</td>
+		</tr>
+				<tr class="detail">
+			<td>Player Name</td>
+			<td>{{ character.iduser.first_name }} {{ character.iduser.last_name }}</td>
+		</tr>
+		<tr class="detail">
+			<td>Character Name</td>
+			<td>{{ character.name }}</td>
+		</tr>
+		<tr class="detail">
+			<td>Class and Levels</td>
+			<td>
+				{% for class in character.characterclass_set.all %}
+                    <span class="icItem">{{ class.idclass }}</span>
+                {% endfor %}			</td>
+		</tr>
+		<tr class="detail">
+			<td>Species</td>
+			<td>{{ character.idspecies }}</td>
+		</tr>
+		<tr>
+			<td class="characterAttributes" colspan="2">
+			<div class="attribute">
+				Body {{ character.body }}
+			</div>
+			<div class="attribute">
+				Armour {{ character.armour }}
+			</div>
+			<div class="attribute">
+				Mana {{ character.mana }}
+			</div>
+		</td></tr>
+		<tr>
+			<td>Base Damage</td>
+			<td>Single</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="character feats">
+	<tbody>
+		<tr>
+			<td>
+				<b>Feats: </b>	
+                    {% for feat in character.characterfeat_set.all %}
+                        <span class="icItem">{{ feat.idfeat }}</span>
+                    {% endfor %}
+            </td>
+		</tr>
+		<tr>
+			<td>
+				<b>Spells: </b>
+                    {% for spell in character.characterspell_set.all %}
+                        <span class="icItem">{{ spell.idspell }}</span>
+                    {% endfor %}
+            </td>
+		</tr>
+		<tr>
+			<td>
+				<b>Lores: </b>
+                    {% for lore in character.characterlore_set.all %}
+                        <span class="icItem">{{ lore.idlore }}</span>
+                    {% endfor %}
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+			<table class="user">
+	<tbody>
+    {% for details in character.iduser.usersdetails_set.all %}
+		<tr>
+			<td>Emergancy Contact</td>
+			<td>{{ details.emergencycontactname }}</td>
+		</tr><tr>
+			<td>ICE Contact</td>
+			<td>{{ details.emergencycontactnumber }}</td>
+		</tr>
+		<tr>
+			<td>Phone Number</td>
+			<td>{{ details.number }}</td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td>{{ character.iduser.email }}</td>
+		</tr>
+		<tr>
+			<td>Car Reg</td>
+			<td>{{ details.carregistration }}</td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+								<span class="icDetail">{{ details.homeaddressline1 }}</span>
+								&nbsp;				</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+									<span class="icDetail">{{ details.homeaddressline2 }}</span>					<span class="icDetail">{{ details.town }}</span>					<span class="icDetail">{{ details.county }}</span>							</td>
+		</tr>
+	</tbody>
+</table>
+<table class="user">
+	<tbody>
+		<tr>
+			<td>
+				Medical Information:<br>
+				{{ details.medicalinformation }}			</td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>	
+			</div>
+		</div>
+        
+</body></html>

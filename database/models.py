@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 class Effect(models.Model):
     name = models.CharField(unique=True, max_length=32)
@@ -64,8 +65,13 @@ class Character(models.Model):
     isalive = models.BooleanField(default=True) 
     isfinished = models.BooleanField(default=False) 
     xp = models.IntegerField(default=0)
+    body = models.IntegerField(default=1)
+    armour = models.IntegerField(default=0)
+    mana = models.IntegerField(default=0)
     def __unicode__(self):
-        return u'%s' % (self.name)
+        return u'%s' % (self.name)       
+    def get_absolute_url(self):
+        return reverse('character-view', kwargs={'pk': self.id})
         
 class FeatType(models.Model):
     type = models.CharField(max_length=45)
@@ -86,11 +92,11 @@ class Class(models.Model):
     clasfeat = models.BooleanField()
     craftingfeat = models.BooleanField()
     lore = models.BooleanField()
-    firstspell = models.IntegerField()
-    secspell = models.IntegerField()
-    thridspell = models.IntegerField()
-    fourthspell = models.IntegerField()
-    fifthspell = models.IntegerField()
+    firstspell = models.IntegerField(default=0)
+    secspell = models.IntegerField(default=0)
+    thridspell = models.IntegerField(default=0)
+    fourthspell = models.IntegerField(default=0)
+    fifthspell = models.IntegerField(default=0)
     
     def __unicode__(self):
         return u'%s %s' % (self.name, self.level)

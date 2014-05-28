@@ -15,6 +15,10 @@ urlpatterns = patterns('',
     name='character-new',),
     url(r'^eblana/', include('database.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^(?P<pk>\d+)/$', database.views.CharacterView.as_view(),
+        name='character-view',),
+    url(r'^edit/(?P<pk>\d+)/$', database.views.UpdateCharacterView.as_view(),
+        name='character-edit',),
 
 )
 
