@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db.models.signals import post_save
 
 class Effect(models.Model):
     name = models.CharField(unique=True, max_length=32)
@@ -59,7 +60,7 @@ class Species(models.Model):
         return u'%s' % (self.name)    
         
 class Character(models.Model):
-    iduser = models.ForeignKey(User) 
+    owner = models.ForeignKey(User) 
     idspecies = models.ForeignKey(Species) 
     name = models.CharField(max_length=45)
     isalive = models.BooleanField(default=True) 
@@ -172,7 +173,7 @@ class CharacterSpell(models.Model):
         return u'%s %s' % (self.idcharacter, self.idspell)  
         
 class UsersDetails(models.Model):
-    iduser = models.ForeignKey(User)
+    iduser = models.OneToOneField(User)
     number = models.CharField(max_length=45)
     emergencycontactname = models.CharField(max_length=45) # Field name made lowercase.
     emergencycontactnumber = models.CharField(max_length=45) # Field name made lowercase.
@@ -183,7 +184,15 @@ class UsersDetails(models.Model):
     country = models.CharField(max_length=256, blank=True)
     carregistration = models.CharField(max_length=45, blank=True) # Field name made lowercase.
     medicalinformation = models.CharField(max_length=256, blank=True) # Field name made lowercase.
-    donotcontact = models.BooleanField() # Field name made lowercase.
+    donotcontact = models.BooleanField(default=False) # Field name made lowercase.
+    def __str__(self):  
+          return "%s's profile" % self.iduser  
+
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:  
+       profile, created = UsersDetails.objects.get_or_create(iduser=instance)  
+
+post_save.connect(create_user_profile, sender=User)
     
 class Lore(models.Model):
     name = models.CharField(max_length=45)

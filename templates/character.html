@@ -18,7 +18,7 @@
 		</tr>
 				<tr class="detail">
 			<td>Player Name</td>
-			<td>{{ character.iduser.first_name }} {{ character.iduser.last_name }}</td>
+			<td>{{ character.owner.first_name }} {{ character.owner.last_name }}</td>
 		</tr>
 		<tr class="detail">
 			<td>Character Name</td>
@@ -85,7 +85,7 @@
 
 			<table class="user">
 	<tbody>
-    {% for details in character.iduser.usersdetails_set.all %}
+    {% for details in character.owner.usersdetails_set.all %}
 		<tr>
 			<td>Emergancy Contact</td>
 			<td>{{ details.emergencycontactname }}</td>
